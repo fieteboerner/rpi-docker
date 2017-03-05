@@ -13,7 +13,8 @@ RUN apt-get update \
         && cd ../.. \
         && rm -rf cphalcon \
         && rm -rf /var/lib/apt/lists/* \
-        && ln -s /etc/php5/mods-avalable/phalcon.ini /etc/php5/fpm/conf.d/20-phalcon.ini
+        && ln -s /etc/php5/mods-avalable/phalcon.ini /etc/php5/fpm/conf.d/20-phalcon.ini \
+        && ln -s /etc/php5/mods-avalable/phalcon.ini /etc/php5/cli/conf.d/20-phalcon.ini
 
 WORKDIR /var/www
 VOLUME ["/var/log"]
