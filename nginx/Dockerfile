@@ -1,5 +1,5 @@
 FROM armhf/debian:jessie
-ENV NGINX_VERSION 1.11.0
+ENV NGINX_VERSION 1.13.0
 ENV OPENSSL_VERSION OpenSSL_1_0_2k
 RUN mkdir /var/www \
         && chown -R www-data:www-data /var/www \

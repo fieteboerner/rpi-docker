@@ -1,5 +1,5 @@
 FROM armhf/debian:jessie
-ENV PHP_VERSION 7.1.1
+ENV PHP_VERSION 7.1.5
 RUN mkdir /var/www \
         && chown -R www-data:www-data /var/www \
         && apt-get update \
@@ -9,7 +9,7 @@ RUN mkdir /var/www \
         && rm -rf /var/lib/apt/lists/* \
         && ln -s /usr/lib/libc-client.a /usr/lib/arm-linux-gnueabihf/libc-client.a \
         && cd /tmp \
-        && wget http://de1.php.net/get/php-${PHP_VERSION}.tar.bz2/from/this/mirror -O php-${PHP_VERSION}.tar.bz2 \
+        && wget http://de2.php.net/get/php-${PHP_VERSION}.tar.bz2/from/this/mirror -O php-${PHP_VERSION}.tar.bz2 \
         && tar jxf php-${PHP_VERSION}.tar.bz2 \
         && cd php-${PHP_VERSION} \
         &&  ./configure --config-cache --prefix=/usr --sbindir=/usr/bin --sysconfdir=/etc/php --localstatedir=/var --with-config-file-path=/etc/php --with-config-file-scan-dir=/etc/php/conf.d --with-pdo-pgsql \
