@@ -1,6 +1,5 @@
 FROM arm32v7/debian:stretch
-ENV NGINX_VERSION 1.13.3
-ENV OPENSSL_VERSION OpenSSL_1_1_0f
+ENV NGINX_VERSION 1.13.6
 # install and setup general
 RUN mkdir /var/www \
         && chown -R www-data:www-data /var/www \
