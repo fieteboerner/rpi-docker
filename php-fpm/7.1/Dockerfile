@@ -1,13 +1,13 @@
-FROM armhf/debian:jessie
-ENV PHP_VERSION 7.1.5
+FROM arm32v7/debian:stretch
+ENV PHP_VERSION 7.1.11
 RUN mkdir /var/www \
         && chown -R www-data:www-data /var/www \
         && apt-get update \
         && apt-get install --no-install-recommends --no-install-suggests -y \
-                       ca-certificates gettext-base supervisor wget build-essential autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dbg libmcrypt-dev libssl-dev libc-client2007e libc-client2007e-dev \
-                       libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng12-dev libfreetype6-dev libkrb5-dev libpq-dev libxml2-dev libxslt1-dev \
-        && rm -rf /var/lib/apt/lists/* \
-        && ln -s /usr/lib/libc-client.a /usr/lib/arm-linux-gnueabihf/libc-client.a \
+                       ca-certificates gettext-base wget build-essential autoconf libfcgi-dev libfcgi0ldbl libjpeg62-turbo-dev libmcrypt-dev libssl-dev libc-client2007e libc-client2007e-dev \
+                       libxml2-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libfreetype6-dev libkrb5-dev libpq-dev libxml2-dev libxslt1-dev \
+        && rm -rf /var/lib/apt/lists/*
+RUN ln -s /usr/lib/libc-client.a /usr/lib/arm-linux-gnueabihf/libc-client.a \
         && cd /tmp \
         && wget http://de2.php.net/get/php-${PHP_VERSION}.tar.bz2/from/this/mirror -O php-${PHP_VERSION}.tar.bz2 \
         && tar jxf php-${PHP_VERSION}.tar.bz2 \
@@ -27,10 +27,8 @@ RUN mkdir /var/www \
         && echo "zend_extension=opcache.so" >> /etc/php/php.ini \
         && rm -rf php-${PHP_VERSION}*
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 WORKDIR /var/www
 VOLUME ["/var/log"]
 EXPOSE 9000
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/php-fpm", "-F"]
